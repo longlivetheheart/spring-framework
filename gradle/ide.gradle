@@ -2,8 +2,10 @@ import org.gradle.plugins.ide.eclipse.model.ProjectDependency
 import org.gradle.plugins.ide.eclipse.model.SourceFolder
 
 
-apply plugin: "propdeps-eclipse"
-apply plugin: "propdeps-idea"
+//apply plugin: "propdeps-eclipse"
+//apply plugin: "propdeps-idea"
+apply plugin: "cn.bestwu.propdeps-idea"
+apply plugin: "cn.bestwu.propdeps-eclipse"
 
 eclipse.jdt {
 	sourceCompatibility = 1.8
@@ -64,15 +66,15 @@ eclipse.project.natures "org.eclipse.wst.common.project.facet.core.nature"
 // Include project specific settings
 task eclipseSettings(type: Copy) {
 	from rootProject.files(
-		"src/eclipse/org.eclipse.jdt.ui.prefs",
-		"src/eclipse/org.eclipse.wst.common.project.facet.core.xml")
+			"src/eclipse/org.eclipse.jdt.ui.prefs",
+			"src/eclipse/org.eclipse.wst.common.project.facet.core.xml")
 	into project.file('.settings/')
 	outputs.upToDateWhen { false }
 }
 
 task eclipseWstComponent(type: Copy) {
 	from rootProject.files(
-		"src/eclipse/org.eclipse.wst.common.component")
+			"src/eclipse/org.eclipse.wst.common.component")
 	into project.file('.settings/')
 	expand(deployname: project.name)
 	outputs.upToDateWhen { false }
